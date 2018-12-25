@@ -1,0 +1,9 @@
+[
+{"ID":"1","Depth":"1001","LuaName":"Wnd_Wait","BundleName":"WaitUI","AssetName":"WaitUI"},
+{"ID":"2","Depth":"1000","LuaName":"Wnd_Message","BundleName":"MessageUI","AssetName":"MessageUI"},
+{"ID":"3","Depth":"999","LuaName":"Wnd_Log","BundleName":"LogUI","AssetName":"LogUI"},
+{"ID":"4","Depth":"2","LuaName":"Wnd_Login","BundleName":"LoginUI","AssetName":"LoginUI"},
+{"ID":"5","Depth":"3","LuaName":"Wnd_SelectServer","BundleName":"SelectServerUI","AssetName":"SelectServerUI"},
+{"ID":"6","Depth":"4","LuaName":"Wnd_Lobby","BundleName":"LobbyUI","AssetName":"LobbyUI"},
+{"ID":"7","Depth":"5","LuaName":"Wnd_Room","BundleName":"RoomUI","AssetName":"RoomUI"}
+]
