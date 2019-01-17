@@ -6,7 +6,6 @@ using System.Text;
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 public static class EditorCoroutineRunner

@@ -137,6 +137,7 @@ public static class CustomSettings
         _GT(typeof(SphereCollider)),
         _GT(typeof(CharacterController)),
         _GT(typeof(CapsuleCollider)),
+        _GT(typeof(BoxCollider2D)),
 
         _GT(typeof(Debug)),
         _GT(typeof(InputField)),
@@ -172,6 +173,10 @@ public static class CustomSettings
         _GT(typeof(LoadingScreen)),
         _GT(typeof(MotionController)),
         _GT(typeof(InputController)),
+        _GT(typeof(BulletController)),
+        _GT(typeof(CameraController)),
+        _GT(typeof(Entity)),
+        _GT(typeof(Follow3DTarget)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

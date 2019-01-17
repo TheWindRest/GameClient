@@ -116,7 +116,6 @@ public class PacketResources : EditorWindow
         for (int i = 0; i < files.Count; i++)
         {
             string file = files[i];
-            string ext = Path.GetExtension(file);
             if (file.EndsWith(".meta") || file.Contains(".DS_Store")) continue;
 
             string md5 = AppConst.md5file(file);
