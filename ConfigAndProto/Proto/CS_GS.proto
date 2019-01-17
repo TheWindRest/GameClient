@@ -12,6 +12,8 @@ enum MsgID
     CS2GS_TransformSync = 2005;
     CS2GS_StateSync = 2006;
     CS2GS_ShootBullet = 2007;
+    CS2GS_TakeDamage = 2008;
+    CS2GS_EntityDestroy = 2009;
 }
 
 message AskRegister
@@ -53,6 +55,8 @@ message EnterRoom
     optional string mail = 2;
     optional string name = 3;
     optional string roomid = 4;
+    optional string mapid = 5;
+    optional string mapdata = 6;
 }
 
 message TransformInfo
@@ -76,7 +80,7 @@ message StateSync
     optional MsgID msgid = 1 [default = CS2GS_StateSync];
     optional string mail = 2;
     optional string roomid = 3;
-    optional int32 health = 4;
+    optional Entity entity = 4;
 }
 
 message ShootBullet
@@ -85,4 +89,37 @@ message ShootBullet
     optional string mail = 2;
     optional string roomid = 3;
     optional int32 weaponid = 4;
+}
+
+enum EntityType
+{
+    Entity_Active = 1;
+    Entity_Static = 2;
+}
+
+message Entity
+{
+    optional EntityType entitytype = 1;
+    optional string entityid = 2;
+    optional int32 health = 3;
+    optional int32 score = 4;
+}
+
+message TakeDamage
+{
+    optional MsgID msgid = 1 [default = CS2GS_TakeDamage];
+    optional string mail = 2;
+    optional string roomid = 3;
+    optional int32 weaponid = 4;
+    optional int32 bulletid = 5;
+    optional Entity shooter = 6;
+    optional Entity target = 7;
+    optional int32 damage = 8;
+}
+
+message EntityDestroy
+{
+    optional MsgID msgid = 1 [default = CS2GS_EntityDestroy];
+    optional string mail = 2;
+    optional Entity entity = 3;
 }
