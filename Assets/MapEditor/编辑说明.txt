@@ -1,0 +1,12 @@
+config  文件中储存的为MapTypeData中需要读取的文件名称
+
+Level1ItemList 地板层
+Level2ItemList 障碍层
+Level3ItemList NPC层
+
+每个字段用英文 ; 隔开
+
+颜色字段用英文 ,隔开
+
+【C#】Color颜色对照表
+https://blog.csdn.net/kasama1953/article/details/51568813
