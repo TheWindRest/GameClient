@@ -81,3 +81,36 @@ function NetworkSenderClass:TransformSync(Speed, Position, Rotation)
     local msg = msgInfo:SerializeToString()
     NetworkManager.Instance:SendMsg(msg, msgInfo.msgid)
 end
+
+function NetworkSenderClass:ShootBullet()
+    local msgInfo = CS_GS_pb.ShootBullet()
+    msgInfo.msgid = CS_GS_pb.CS2GS_ShootBullet
+    msgInfo.mail = self.Mail
+    msgInfo.roomid = self.RoomID
+    msgInfo.weaponid = 0
+    
+    local msg = msgInfo:SerializeToString()
+    NetworkManager.Instance:SendMsg(msg, msgInfo.msgid)
+end
+
+function NetworkSenderClass:TakeDamage(TargetType, TargetID)
+    if TargetType == EntityType.Active then
+        TargetType = CS_GS_pb.Entity_Active
+    elseif TargetType == EntityType.Static then
+        TargetType = CS_GS_pb.Entity_Static
+    end
+
+    local msgInfo = CS_GS_pb.TakeDamage()
+    msgInfo.msgid = CS_GS_pb.CS2GS_TakeDamage
+    msgInfo.mail = self.Mail
+    msgInfo.roomid = self.RoomID
+    msgInfo.weaponid = 0
+    msgInfo.bulletid = 0
+    msgInfo.shooter.entitytype = CS_GS_pb.Entity_Active
+    msgInfo.shooter.entityid = self.Mail
+    msgInfo.target.entitytype = TargetType
+    msgInfo.target.entityid = TargetID
+    
+    local msg = msgInfo:SerializeToString()
+    NetworkManager.Instance:SendMsg(msg, msgInfo.msgid)
+end

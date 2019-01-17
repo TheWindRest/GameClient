@@ -47,7 +47,6 @@ function Class_WindowManager:Init()
     if UICanvas == nil then
         print("查找Canvas失败")
     else
-        -- GameObject.DontDestroyOnLoad(UICanvas)
         print("找到组件", UICanvas.name)
     end
 

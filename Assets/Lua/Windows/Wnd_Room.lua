@@ -10,13 +10,20 @@ function Wnd_RoomClass:Start(WindowIndex)
 end
 
 function Wnd_RoomClass:OnNewInstance()
-    self.EntityManager = Class_EntityManager.new()
-    self.EntityManager:Init()
-    self.EntityManager:CreatePlayer()
+    self.ShootBtn = Utils.FindChild(self.Instance, "Shoot")
+    self:Listen(self.ShootBtn, EventTriggerType.PointerClick, self.OnShootClick)
 end
 
 function Wnd_RoomClass:OnShowDone()
+    MapDrawer:CreateMap(1)
+    local player = EntityManager:CreatePlayer(NetworkSender.Mail, MapDrawer:GetRandomPos(1), Quaternion.Euler(0, 0, 0))
+    local camera = GameObject.Find("Camera")
+    local cameraController = camera:GetComponent(typeof((CameraController)))
+    cameraController.target = player.transform
+end
 
+function Wnd_RoomClass:OnShootClick(Object)
+    NetworkSender:ShootBullet()
 end
 
 function Wnd_RoomClass:OnLostInstance()

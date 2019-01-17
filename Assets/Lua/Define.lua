@@ -37,6 +37,9 @@ EventType = {
     UserInfo                = "1000",
     TransformChange         = "1001",
     StateChange             = "1002",
+    ShootBullet             = "1003",
+    UpdateMap               = "1004",
+    TakeDamage              = "1005"
 }
 
 LoginServerIP = "192.168.1.180"

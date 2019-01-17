@@ -51,10 +51,18 @@ function NetworkHandlerClass:HandleNetMsg(Data, MsgID)
         local msgInfo = CS_GS_pb.TransformSync()
         msgInfo:ParseFromString(Data)
         self:TransformChange(msgInfo)
+    elseif MsgID == CS_GS_pb.CS2GS_TakeDamage then
+        local msgInfo = CS_GS_pb.TakeDamage()
+        msgInfo:ParseFromString(Data)
+        self:TakeDamage(msgInfo)
     elseif MsgID == CS_GS_pb.CS2GS_StateSync then
         local msgInfo = CS_GS_pb.StateSync()
         msgInfo:ParseFromString(Data)
         self:StateChange(msgInfo)
+    elseif MsgID == CS_GS_pb.CS2GS_ShootBullet then
+        local msgInfo = CS_GS_pb.ShootBullet()
+        msgInfo:ParseFromString(Data)
+        self:ShootBullet(msgInfo)
     elseif MsgID == GC_LS_pb.LS2GC_Error then
         local recv = GC_LS_pb.ErrorMsg()
         recv:ParseFromString(Data)
@@ -67,12 +75,11 @@ function NetworkHandlerClass:HandleNetMsg(Data, MsgID)
 end
 
 function NetworkHandlerClass:HandleError(Error)
-    if Error == ErrorID.ERR_LOGIN_FAILED then
-        print("登陆账号失败！")
-    elseif Error == ErrorID.ERR_LOGIN_OTHER then
-        print("账号已在其他地方登陆！")
-    elseif Error == ErrorID.ERR_CHECK_LOGIN then
-        print("登陆网关失败！")
+    local errorInfo = ErrorID[tonumber(Error)]
+    if errorInfo then
+        print(errorInfo)
+    else
+        print("无法处理的错误ID", Error)
     end
 end
 
@@ -105,6 +112,7 @@ function NetworkHandlerClass:EnterRoom(Msg)
     NetworkSender.RoomID = Msg.roomid
     local loadFinished = function()
         WindowManager:ReGetCanvas()
+        Event.Brocast(EventType.UpdateMap, Msg.mapid, Msg.mapdata)
         Event.Brocast(EventType.UILogEnter)
         Event.Brocast(EventType.UIRoomEnter)
     end
@@ -115,8 +123,16 @@ function NetworkHandlerClass:TransformChange(Msg)
     Event.Brocast(EventType.TransformChange, Msg)
 end
 
+function NetworkHandlerClass:TakeDamage(Msg)
+    Event.Brocast(EventType.TakeDamage, Msg)
+end
+
 function NetworkHandlerClass:StateChange(Msg)
     Event.Brocast(EventType.StateChange, Msg)
+end
+
+function NetworkHandlerClass:ShootBullet(Msg)
+    Event.Brocast(EventType.ShootBullet, Msg)
 end
 
 -- local req = GetPlayerListReq()

@@ -3,6 +3,8 @@ local json = require "cjson"
 
 ConfigName = {
     WindowDefine =          "WindowDefine",
+    Entity =                "Entity",
+    Map =                   "Map",
 }
 
 ConfigTable = {}
